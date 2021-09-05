@@ -1,0 +1,14 @@
+---
+
+all:
+  children:
+    core:
+      hosts:
+        core01:
+        core02:
+    switch:
+      hosts:
+        sw01:
+    firewall:
+      hosts:
+        fw01:
