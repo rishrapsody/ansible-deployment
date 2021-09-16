@@ -3,10 +3,9 @@ hostname {{inventory_hostname}}
 interface {{int.name}}
 no shutdown
 description {{int.description}}
-{% if {{int.type}} == 'l3' %}
+{% set type = int.type %}
+{% if type == 'l3' %}
 ip address {{int.ip}} {{int.netmask}}
-{% else %}
-switchport mode trunk
-switchport trunk encapsulation dot1q
+
 {%endif%}
 {% endfor %}
