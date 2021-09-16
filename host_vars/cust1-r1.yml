@@ -1,0 +1,21 @@
+---
+ansible_host: 192.168.1.6
+
+interfaces:
+  - name: f0/0
+    type: l3
+    ip: 172.16.10.20
+    netmask: 255.255.255.0
+    description: cust1_r1-to-switch
+  - name: lo1
+    type: l3
+    ip: 100.100.100.100
+    netmask: 255.255.255.255
+
+bgp:
+  asn: 100
+  peer:
+    - remote_ip: 172.16.10.1
+      remote_as: 11179
+    - remote_ip: 172.16.10.2
+      remote_as: 11179

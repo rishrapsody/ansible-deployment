@@ -12,3 +12,17 @@ all:
     firewall:
       hosts:
         fw01:
+
+    cust1:
+      hosts:
+        cust1-r1:
+        cust1-r2:
+    cust2:
+      hosts:
+        cust2-r1:
+        cust2-r2:
+
+customer:
+  children:
+    cust1:
+    cust2:

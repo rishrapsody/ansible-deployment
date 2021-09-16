@@ -1,0 +1,85 @@
+---
+ansible_host: 192.168.1.3
+
+interfaces:
+#  int:
+  - name: f0/0
+    type: l3
+    ip: 10.10.10.3
+    netmask: 255.255.255.0
+    description: core01_to_fw01
+#  int:
+  - name: f2/0
+    type: l3
+    ip: 10.20.20.1
+    netmask: 255.255.255.0
+    description: core01_to_core02
+#  int:
+  - name: f1/0
+    type: l2
+    mode: trunk
+    encapsulation: dot1q
+    description: core01_to_sw01   
+
+bgp:
+  asn: 11179
+  peer:
+    neighbor: 10.10.10.1
+    remote_as: 11179
+    vrf: shared
+    rd: 10
+    rt: 10:10
+    descrtion: core01_to_core02_shared
+
+cust:
+  cust1:
+    id: 1
+    vrf:
+      name: cust1
+      rd: 1:1
+    int:
+      name: f1/0.{{id}}
+      type: l3
+      vrf: cust1
+      ip: 172.16.10.1
+      netmask: 255.255.255.0
+    bgp:
+#      neighbor:
+      - remote_ip: 172.16.10.20
+        remote_as: 100
+        adv_default: yes
+        address_family: cust1
+#      neighbor:
+      - remote_ip: 172.16.10.30
+        remote_as: 101
+        adv_default: yes
+        address_family: cust1
+    nat:
+      subnet: 192.0.2.0
+      netmask: 255.255.255.0
+
+  cust2:
+    id: 2
+    vrf:
+      name: cust2
+      rd: 2:2
+    int:
+      name: f1/0.{{id}}
+      type: l3
+      vrf: cust2
+      ip: 172.16.20.1
+      netmask: 255.255.255.0
+    bgp:
+#      neighbor:
+      - remote_ip: 172.16.20.20
+        remote_as: 200
+        adv_default: yes
+        address_family: cust2
+#      neighbor:
+      - remote_ip: 172.16.20.30
+        remote_as: 201
+        adv_default: yes
+        address_family: cust2
+    nat:
+      subnet: 192.0.2.0
+      netmask: 255.255.255.0  
