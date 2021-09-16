@@ -1,1 +1,10 @@
 ---
+- name: "Base config"
+  hosts: core
+  connection: network_cli
+
+  tasks:
+    - name: "Configuring core routers"
+      cli_config:
+        config: "{{lookup('template','core_base_template.j2')}}"
+      
