@@ -1,8 +1,9 @@
 hostname {{inventory_hostname}}
 
 {% for int in interfaces %}
-interfaces {{int.name}}
+int {{int.name}}
 no shut
 switchport mode trunk
 switchport trunk encapsulation dot1q
+description switch_to_core
 {% endfor %}
