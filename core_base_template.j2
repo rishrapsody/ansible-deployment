@@ -6,6 +6,7 @@ description {{int.description}}
 {% set type = int.type %}
 {% if type == 'l3' %}
 ip address {{int.ip}} {{int.netmask}}
-
 {%endif%}
 {% endfor %}
+
+

@@ -1,10 +1,18 @@
 ---
-- name: "Base config"
+- name: "Core Base config"
   hosts: core
   connection: network_cli
 
   tasks:
-    - name: "Configuring core routers"
+    - name: "Configuring core routers base config"
       cli_config:
         config: "{{lookup('template','core_base_template.j2')}}"
-      
+
+- name: "Switch Base Config"
+  hosts: switch
+  connection: network_cli
+
+  tasks:
+    - name: "Configuring switch base config"
+      cli_config:
+        config: "{{lookup('template','switch_base_template.j2')}}"
