@@ -2,7 +2,8 @@
 int {{int.name}}
 ip address {{int.ip}} {{int.netmask}}
 no shut
-description {{int.description | default("local interface")}}
+description {{int.description | default("local_interface")}}
+!
 {% endfor %}
 
 

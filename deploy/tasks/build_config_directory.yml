@@ -1,18 +1,18 @@
 ---
 - name: "Create Config Directory"
   file:
-    path: files/{{inventory_hostname}}
+    path: deploy/files/{{inventory_hostname}}
     state: directory
-  run_once: yes
+#  run_once: yes
 
 - name: "Create tmp directory"
   file:
-    path: files/{{inventory_hostname}}/tmp
+    path: deploy/files/{{inventory_hostname}}/tmp
     state: directory
-  run_once: yes
+#  run_once: yes
 
 - name: "Create final config directory"
   file:
-    path: files/{{inventory_hostname}}/final
+    path: deploy/files/{{inventory_hostname}}/final
     state: directory
-  run_once: yes
+#  run_once: yes
