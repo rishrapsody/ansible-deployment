@@ -1,0 +1,5 @@
+---
+- name: "Add customer info on core"
+  template:
+    src: ../templates/core_rtr_cust_conf_template.j2
+    dest: deploy/files/core/core_rtr_cust_conf.cfg

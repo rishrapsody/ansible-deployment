@@ -7,6 +7,7 @@ description {{int.description}}
 {% if type == 'l3' %}
 ip address {{int.ip}} {{int.netmask}}
 {%endif%}
+ip nat outside
 {% endfor %}
 
 

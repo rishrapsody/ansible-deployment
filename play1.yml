@@ -27,3 +27,20 @@
 
     - name: "Building customer config"
       include_tasks: deploy/tasks/prep_cust_config.yml
+
+- name: "Configuring Switch for customer"
+  hosts: switch
+  connection: network_cli
+
+  tasks:
+    - name: "Preparing switch config"
+      include_tasks: deploy/tasks/prep_switch_cust_config.yml
+
+
+- name: "Configuring Core  for customer"
+  hosts: core
+  connection: network_cli
+
+  tasks:
+    - name: "Preparing core config"
+      include_tasks: deploy/tasks/prep_core_rtr_cust_config.yml

@@ -5,7 +5,7 @@ interfaces:
 #  - int:
   - name: f0/0
     type: l3
-    ip: 10.10.10.4
+    ip: 10.10.20.2
     netmask: 255.255.255.0
     description: core01_to_fw01
 #  - int:
