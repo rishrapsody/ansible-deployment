@@ -1,0 +1,11 @@
+---
+
+- name: "Prep customer rtr base config"
+  template:
+    src: templates/cust_conf.j2
+    dest: deploy/files/{{inventory_hostname}}/tmp/{{inventory_hostname}}.conf
+
+- name: "Prep customer rtr mgmt config"
+  template:
+    src: templates/cust_mgmt.j2
+    dest: deploy/files/{{inventory_hostname}}/tmp/{{inventory_hostname}}_mgmt.conf

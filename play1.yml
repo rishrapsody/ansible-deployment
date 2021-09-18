@@ -16,3 +16,14 @@
     - name: "Configuring switch base config"
       cli_config:
         config: "{{lookup('template','switch_base_template.j2')}}"
+
+- name: "Customer router config"
+  hosts: customer
+  connection: network_cli
+
+  tasks:
+    - name: "Building directory space"
+      include_tasks: deploy/tasks/build_config_directory.yml
+
+    - name: "Building customer config"
+      include_tasks: deploy/tasks/prep_cust_config.yml

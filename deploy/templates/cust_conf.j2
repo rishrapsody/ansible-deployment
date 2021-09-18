@@ -1,0 +1,12 @@
+{% for int in interfaces %}
+int {{int.name}}
+ip address {{int.ip}} {{int.netmask}}
+no shut
+description {{int.description | default("local interface")}}
+{% endfor %}
+
+
+router bgp {{bgp.asn}}
+{% for peer in bgp['peer'] %}
+neighbor {{peer.remote_ip}} remote-as {{peer.remote_as}}
+{% endfor %}
