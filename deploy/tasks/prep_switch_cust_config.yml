@@ -1,0 +1,6 @@
+---
+- name: "Add customer info on switch"
+  template:
+    src: ../templates/switch_cust_conf_template.j2
+    dest: deploy/files/core/switch_cust_conf.cfg
+    

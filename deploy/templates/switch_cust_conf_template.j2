@@ -1,0 +1,13 @@
+{% for vlan in vlans%}
+int {{vlan.id}}
+name {{vlan.name}}
+!
+{% endfor %}
+
+{% for cust in cust_sw %}
+int {{cust.int.name}}
+switchport mode access
+switchport access vlan {{cust.int.vlan}}
+no shut
+!
+{% endfor %}

@@ -16,3 +16,9 @@
     path: deploy/files/{{inventory_hostname}}/final
     state: directory
 #  run_once: yes
+
+- name: "Create core config directory"
+  file:
+    path: deploy/files/core/
+    state: directory
+  run_once: yes

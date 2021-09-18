@@ -1,7 +1,7 @@
 ---
 ansible_host: 192.168.1.5
 
-vlan:
+vlans:
   - id: 11
     name: cust1
   - id: 22
@@ -14,7 +14,7 @@ interfaces:
     mode: trunk
 
 cust_sw:
-  cust1:
+  - cust1:
     int:
       - name: f1/2
         mode: access
@@ -22,7 +22,7 @@ cust_sw:
       - name: f1/3
         mode: access
         vlan: 11
-  cust2:
+  - cust2:
     int:        
       - name: f1/4
         mode: access
