@@ -33,17 +33,17 @@ bgp:
 
 customer:
   - cust1:
-      id: 11
-      vrf:
+    - id: 11
+    - vrf:
         name: cust1
         rd: 11:11
-      int:
+    - int:
         name: f1/0
         type: l3
         vrf: cust1
         ip: 172.16.10.1
         netmask: 255.255.255.0
-      bgp:
+    - bgp:
   #      neighbor:
         - remote_ip: 172.16.10.20
           remote_as: 100
@@ -54,22 +54,22 @@ customer:
           remote_as: 101
           adv_default: yes
           address_family: cust1
-      nat:
+    - nat:
         subnet: 192.0.2.0
         netmask: 255.255.255.0
 
   - cust2:
-      id: 22
-      vrf:
+    - id: 22
+    - vrf:
         name: cust2
         rd: 22:22
-      int:
+    - int:
         name: f1/0.{{id}}
         type: l3
         vrf: cust2
         ip: 172.16.20.1
         netmask: 255.255.255.0
-      bgp:
+    - bgp:
   #      neighbor:
         - remote_ip: 172.16.20.20
           remote_as: 200
@@ -80,6 +80,6 @@ customer:
           remote_as: 201
           adv_default: yes
           address_family: cust2
-      nat:
+    - nat:
         subnet: 192.0.2.0
         netmask: 255.255.255.0
