@@ -1,7 +1,6 @@
 {% for vlan in vlans %}
 int {{vlan.id}}
 name {{vlan.name}}
-
 {% endfor %}
 
 {% for cust in cust_sw %}
