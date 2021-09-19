@@ -28,6 +28,14 @@
     - name: "Building customer config"
       include_tasks: deploy/tasks/prep_cust_config.yml
 
+    - name: "Configuring customer rtr config"
+      cli_config:
+        config: "{{lookup('file','deploy/files/tmp/{{inventory_hostname}}/{{inventory_hostname}}.cfg')}}"
+
+    - name: "Configuring customer rtr mgmt config"
+      cli_config:
+        config: "{{lookup('file','deploy/files/tmp/{{inventory_hostname}}/{{inventory_hostname}}_mgmt.cfg')}}"
+
 - name: "Configuring Switch for customer"
   hosts: switch
   connection: network_cli
