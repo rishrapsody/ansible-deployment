@@ -32,7 +32,7 @@ bgp:
     descrtion: core01_to_core02_shared
 
 
-cust:
+customer:
   cust1:
     id: 1
     vrf:

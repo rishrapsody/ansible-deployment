@@ -3,7 +3,7 @@ ip vrf {{cust.vrf.name}}
 rd {{cust.id}}:{{cust.id}}
 
 
-int {{cust.int.name}}
+int {{cust.int.name}}.{{cust.id}}
 ip vrf forwarding {{cust.int.vrf}}
 no shutdown
 encapsulation dot1q {{cust.int.id}}
@@ -12,10 +12,10 @@ ip address {{cust.int.ip}} {{cust.int.netmask}}
 description {{cust.int.vrf}}_customer
 
 router bgp 11179
-	{% for peer in cust.bgp %}
+	{% for peer in cust['bgp'] %}
 	address-family ipv4 vrf {{peer.address_family}}
 	redistribute static metric 10
-	neighbor {{peer.remote_ip}} remote-as {{cust.bgp.remote_as}}
+	neighbor {{peer.remote_ip}} remote-as {{peer.remote_as}}
 	neighbor {{peer.remote_ip}} activate
 	default-information originate
 	exit-address-family

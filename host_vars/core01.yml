@@ -38,7 +38,7 @@ customer:
       name: cust1
       rd: 11:11
     int:
-      name: f1/0.{{id}}
+      name: f1/0.
       type: l3
       vrf: cust1
       ip: 172.16.10.1
