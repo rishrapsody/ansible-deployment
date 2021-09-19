@@ -34,10 +34,10 @@ bgp:
 
 customer:
   - cust1:
-    id: 1
+    id: 11
     vrf:
       name: cust1
-      rd: 1:1
+      rd: 11:11
     int:
       name: f1/0
       type: l3
@@ -65,10 +65,10 @@ customer:
       netmask: 255.255.255.0
 
   - cust2:
-    id: 2
+    id: 22
     vrf:
       name: cust2
-      rd: 2:2
+      rd: 22:22
     int:
       name: f1/0
       type: l3
