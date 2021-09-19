@@ -1,12 +1,12 @@
 {% for cust in customer %}
 ip vrf {{cust.vrf.name}}
-rd {{id}}:{{id}}
+rd {{cust.id}}:{{cust.id}}
 
 
-int {{cust.int.name}}.{{id}}
+int {{cust.int.name}}.{{cust.id}}
 ip vrf forwarding {{cust.int.vrf}}
 no shutdown
-encapsulation dot1q {{cust.int.id}}
+encapsulation dot1q {{cust.id}}
 ip nat inside
 ip address {{cust.int.ip}} {{cust.int.netmask}}
 description {{cust.int.vrf}}_customer
@@ -20,7 +20,7 @@ neighbor {{peer.remote_ip}} activate
 default-information originate
 exit-address-family
 {% endfor %}
-ip nat pool {{cust.vrf.name}}_pub_ip {{cust.nat.subnet | ipaddr(id) | ipaddr('address')}} prefix-length 32
+ip nat pool {{cust.vrf.name}}_pub_ip {{cust.nat.subnet | ipaddr(cust.id) | ipaddr('address')}} prefix-length 32
 ip access-list standard {{cust.vrf.name}}_lan
 permit any
 exit
