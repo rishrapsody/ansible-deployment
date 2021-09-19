@@ -36,6 +36,9 @@
     - name: "Preparing switch config"
       include_tasks: deploy/tasks/prep_switch_cust_config.yml
 
+    - name: "Configuring switch cust config"
+      cli_config:
+        config: "{{lookup('file','switch_cust_conf.cfg')}}"
 
 - name: "Configuring Core  for customer"
   hosts: core
@@ -44,3 +47,7 @@
   tasks:
     - name: "Preparing core config"
       include_tasks: deploy/tasks/prep_core_rtr_cust_config.yml
+
+    - name: "Configuring core cust config"
+      cli_config:
+        config: "{{lookup('file','core_rtr_{{inventory_hostname}}_cust_conf.cfg')}}"
