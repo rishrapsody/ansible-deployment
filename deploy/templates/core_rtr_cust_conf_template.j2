@@ -13,13 +13,14 @@ description {{cust.int.vrf}}_customer
 
 {% if inventory_hostname == 'core02' %}
 route-map {{cust.routemap.name}}-{{cust.int.vrf}} permit 10
-set as-path prepend last-as {{cust.routemap.prepend}}
+set as-path prepend {{cust.routemap.prepend}}
 exit
 {% endif %}
 
 router bgp 11179
 {% for peer in cust['bgp'] %}
 address-family ipv4 vrf {{peer.address_family}}
+network 0.0.0.0
 neighbor {{peer.remote_ip}} remote-as {{peer.remote_as}}
 neighbor {{peer.remote_ip}} activate
 neighbor {{peer.remote_ip}} soft-reconfiguration inbound
