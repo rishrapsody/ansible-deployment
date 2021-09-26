@@ -23,7 +23,7 @@
   tasks:
     - name: "Configuring firewall base config"
       blockinfile:
-        block: "{{ lookup('template','firewall_base_template.j2') }}"
+        block: "{{ lookup('template','fw_base_template.j2') }}"
         path: /etc/network/interfaces
 
 - name: "Customer router config"
