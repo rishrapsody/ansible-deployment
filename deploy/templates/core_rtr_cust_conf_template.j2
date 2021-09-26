@@ -13,7 +13,7 @@ description {{cust.int.vrf}}_customer
 
 {% if inventory_hostname == 'core02' %}
 route-map {{cust.routemap.name}}-{{cust.int.vrf}} permit 10
-set as-path prepend last-as {{cust.routemap.as-path-prepend}}
+set as-path prepend last-as {{cust.routemap.prepend}}
 {% endif %}
 
 router bgp 11179
