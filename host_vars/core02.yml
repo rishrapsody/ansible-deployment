@@ -53,7 +53,7 @@ customer:
         remote_as: 100
         adv_default: yes
         address_family: cust1
-        adv-map-out: rt-map-cust1
+        adv_map_out: rt-map-cust1
 #      neighbor:
       - remote_ip: 172.16.10.30
         remote_as: 101
@@ -84,7 +84,7 @@ customer:
         remote_as: 200
         adv_default: yes
         address_family: cust2
-        adv-map-out: rt-map-cust2
+        adv_map_out: rt-map-cust2
 #      neighbor:
       - remote_ip: 172.16.20.30
         remote_as: 201
