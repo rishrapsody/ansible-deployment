@@ -4,7 +4,7 @@ ansible_host: 192.168.1.2
 interfaces:
   - name: eth1
     ip: 10.10.10.1
-    nemtmask: 255.255.255.0
+    netmask: 255.255.255.0
   - name: eth2
     ip: 10.10.20.1
     netmask: 255.255.255.0
