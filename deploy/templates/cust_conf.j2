@@ -16,6 +16,6 @@ redistribute connected metric 10
 
 
 ip dhcp pool {{inventory_hostname}}_lan
-network {{ interfaces | selectattr('name','match','f1/0') | map(attribute='ip') | first | ipaddr('-1') }} {{ interfaces | selectattr('name','match','f1/0') | map(attribute='netmask') | first  }}
+network {{ interfaces | selectattr('name','match','f1/0') | map(attribute='ip') | ipaddr('-1') }} {{ interfaces | selectattr('name','match','f1/0') | map(attribute='netmask') | first  }}
 default-router {{ interfaces | selectattr('name','match','f1/0') | map(attribute='ip') | first }}
 dns-server {{dhcp['dns']}}
