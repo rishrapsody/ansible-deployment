@@ -1,0 +1,5 @@
+---
+
+- name: "Configuring switch cust config"
+  cli_config:
+    config: "{{lookup('file','deploy/files/core/switch_cust_conf.cfg')}}"

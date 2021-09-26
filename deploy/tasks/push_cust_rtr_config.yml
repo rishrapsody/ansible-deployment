@@ -1,0 +1,9 @@
+---
+
+- name: "Configuring customer rtr config"
+  cli_config:
+    config: "{{lookup('file','deploy/files/{{inventory_hostname}}/tmp/{{inventory_hostname}}.cfg')}}"
+
+- name: "Configuring customer rtr mgmt config"
+  cli_config:
+    config: "{{lookup('file','deploy/files/{{inventory_hostname}}/tmp/{{inventory_hostname}}_mgmt.cfg')}}"

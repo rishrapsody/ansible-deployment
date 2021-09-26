@@ -1,0 +1,5 @@
+---
+
+- name: "Configuring core cust config"
+  cli_config:
+    config: "{{lookup('file','deploy/files/core/core_rtr_{{inventory_hostname}}_cust_conf.cfg')}}"
