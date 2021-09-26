@@ -26,7 +26,7 @@ permit any
 exit
 
 ip nat inside source list {{cust.vrf.name}}_lan pool {{cust.vrf.name}}_pub_ip vrf {{cust.vrf.name}} overload
-{% if {{inventory_hostname}} == 'core01' %}
+{% if inventory_hostname == 'core01' %}
 ip route vrf {{cust.vrf.name}} 0.0.0.0 0.0.0.0 10.10.10.1 global
 {% else %}
 ip route vrf {{cust.vrf.name}} 0.0.0.0 0.0.0.0 10.10.20.1 global
