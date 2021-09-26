@@ -11,12 +11,21 @@ ip nat inside
 ip address {{cust.int.ip}} {{cust.int.netmask}}
 description {{cust.int.vrf}}_customer
 
+{% if inventory_hostname == 'core02' %}
+route-map {{route-map.name}}{{cust.int.vrf}} permit 10
+set as-path prepend last-as {{route-map.as-path-prepend}}
+{% endif %}
+
 router bgp 11179
 {% for peer in cust['bgp'] %}
 address-family ipv4 vrf {{peer.address_family}}
 redistribute static metric 10
 neighbor {{peer.remote_ip}} remote-as {{peer.remote_as}}
 neighbor {{peer.remote_ip}} activate
+neighbor {{peer.remote_ip}} soft-reconfiguration inbound
+{% if inventory_hostname == 'core02' %}
+neighbor {{peer.remote_ip}} route-map {{route-map.name}}{{cust.int.vrf}} out
+{% endif %}
 default-information originate
 exit-address-family
 {% endfor %}

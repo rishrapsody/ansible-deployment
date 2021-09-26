@@ -10,5 +10,6 @@ description {{int.description | default("local_interface")}}
 router bgp {{bgp.asn}}
 {% for peer in bgp['peer'] %}
 neighbor {{peer.remote_ip}} remote-as {{peer.remote_as}}
+neighbor {{peer.remote_ip}} soft-reconfiguration inbound
 {% endfor %}
 
