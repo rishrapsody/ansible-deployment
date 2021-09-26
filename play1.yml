@@ -17,6 +17,15 @@
       cli_config:
         config: "{{lookup('template','switch_base_template.j2')}}"
 
+- name: "Firewall Base Config"
+  hosts: firewall
+
+  tasks:
+    - name: "Configuring firewall base config"
+      blockinfile:
+        block: "{{ lookup('template','firewall_base_template.j2') }}"
+        path: /etc/network/interfaces
+
 - name: "Customer router config"
   hosts: customer
   connection: network_cli
@@ -53,3 +62,4 @@
 
     - name: "Push core config"
       include_tasks: deploy/tasks/push_core_rtr_cust_config.yml
+

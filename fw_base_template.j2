@@ -1,0 +1,8 @@
+{% for int in interfaces %}
+#Static config for {{int.name}}
+auto {{int.name}}
+iface {{int.name}} inet static
+    address {{int.ip}}
+    netmask {{int.netmask}}
+    up echo nameserver 8.8.8.8 > /etc/resolv.conf
+{% endfor %}
