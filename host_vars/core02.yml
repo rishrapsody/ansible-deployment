@@ -59,7 +59,7 @@ customer:
         remote_as: 101
         adv_default: yes
         address_family: cust1
-        adv-map-out: rt-map-cust1
+        adv_map_out: rt-map-cust1
     nat:
       subnet: 192.0.2.0
       netmask: 255.255.255.0
@@ -90,7 +90,7 @@ customer:
         remote_as: 201
         adv_default: yes
         address_family: cust2
-        adv-map-out: rt-map-cust2
+        adv_map_out: rt-map-cust2
     nat:
       subnet: 192.0.2.0
       netmask: 255.255.255.0  
