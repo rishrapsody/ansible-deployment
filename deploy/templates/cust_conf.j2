@@ -14,3 +14,8 @@ neighbor {{peer.remote_ip}} soft-reconfiguration inbound
 redistribute connected metric 10
 {% endfor %}
 
+
+ip dhcp pool {{inventory_hostname}}_lan
+network {{ interfaces | selectattr('name','f1/0') | map(attribute='ip') | ipaddr('network') }} {{ interfaces | selectattr('name','f1/0') | map(attribute='netmask') }}
+default-router {{ interfaces | selectattr('name','f1/0') | map(attribute='ip') }}
+dns-server {{dhcp.dns}}

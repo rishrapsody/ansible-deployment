@@ -11,6 +11,12 @@ interfaces:
     type: l3
     ip: 100.100.100.100
     netmask: 255.255.255.255
+  - name: f1/0
+    type: l3
+    ip: 172.11.10.1
+    netmask: 255.255.255.0
+    description: cust1_r1_lan
+
 
 bgp:
   asn: 100
@@ -19,3 +25,7 @@ bgp:
       remote_as: 11179
     - remote_ip: 172.16.10.2
       remote_as: 11179
+
+
+dhcp:
+  dns: 8.8.8.8

@@ -57,9 +57,7 @@ customer:
     nat:
       subnet: 192.0.2.0
       netmask: 255.255.255.0
-    dhcp:
-      subnet: 192.168.10.0
-      netmask: 255.255.255.0
+
 
   - cust2:
     id: 22
@@ -86,6 +84,4 @@ customer:
     nat:
       subnet: 192.0.2.0
       netmask: 255.255.255.0
-    dhcp:
-      subnet: 192.168.20.0
-      netmask: 255.255.255.0
+
