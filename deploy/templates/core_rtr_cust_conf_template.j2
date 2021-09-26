@@ -20,7 +20,6 @@ exit
 router bgp 11179
 {% for peer in cust['bgp'] %}
 address-family ipv4 vrf {{peer.address_family}}
-redistribute static metric 10
 neighbor {{peer.remote_ip}} remote-as {{peer.remote_as}}
 neighbor {{peer.remote_ip}} activate
 neighbor {{peer.remote_ip}} soft-reconfiguration inbound
