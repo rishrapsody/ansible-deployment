@@ -26,7 +26,7 @@
         block: "{{ lookup('template','fw_base_template.j2') }}"
         path: /etc/network/interfaces
     - name: "Enable interfaces"
-      shell: sudo ifconfig {{item}} up
+      shell: ifup {{item}}
       loop: "{{interfaces | map(attribute='name') | list}}"
 
 - name: "Customer router config"
