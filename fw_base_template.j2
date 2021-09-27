@@ -5,5 +5,5 @@ iface {{int.name}} inet static
     address {{int.ip}}
     netmask {{int.netmask}}
     up echo nameserver 8.8.8.8 > /etc/resolv.conf
-    up ifconfig {{int.name}} up
+    up echo ifconfig {{int.name}} up
 {% endfor %}
