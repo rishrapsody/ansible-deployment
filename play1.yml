@@ -25,6 +25,9 @@
       blockinfile:
         block: "{{ lookup('template','fw_base_template.j2') }}"
         path: /etc/network/interfaces
+    - name: "Enable interfaces"
+      command: ifconfig "{{item}}" up
+      loop: {{interfaces | map(attribute='name') | list}}
 
 - name: "Customer router config"
   hosts: customer
