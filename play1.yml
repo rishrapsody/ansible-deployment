@@ -27,7 +27,7 @@
         path: /etc/network/interfaces
     - name: "Enable interfaces"
       command: ifconfig "{{item}}" up
-      loop: {{interfaces | map(attribute='name') | list}}
+      loop: "{{interfaces | map(attribute='name') | list}}"
 
 - name: "Customer router config"
   hosts: customer
