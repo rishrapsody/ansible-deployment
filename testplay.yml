@@ -1,0 +1,17 @@
+---
+- name: "Test play"
+  hosts: core01
+  connection: network_cli
+
+  tasks:
+    - name: "get facts"
+      ios_facts:
+        gather_subnet: all
+
+    - name: "Command output"
+      cli_command:
+        commands: "show run | sec nat pool"
+      register: out
+    - name: "Print"
+      debug:
+        msg: "{{out}}"
