@@ -30,7 +30,7 @@ neighbor {{peer.remote_ip}} route-map {{peer.adv_map_out}} out
 default-information originate
 exit-address-family
 {% endfor %}
-ip nat pool {{cust.vrf.name}}_pub_ip {{cust.nat.subnet | ipmath(cust.id)}} {{cust.nat.subnet | ipmath(cust.id)}} prefix-length 30
+ip nat pool {{cust.vrf.name}}_pub_ip {{cust.nat.subnet | ipmath(cust.id)}} {{cust.nat.subnet | ipmath(cust.id)}} prefix-length 24
 ip access-list standard {{cust.vrf.name}}_lan
 permit any
 exit
