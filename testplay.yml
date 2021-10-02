@@ -24,7 +24,7 @@
         ip: "{{out.stdout_lines[0] | regex_findall('.*(\\S+).*')}}"
     - name: "Print var"
       debug:
-        msg: "{{cust}}"
+        msg: "{{ip}}"
 
     - name: "add line"
       lineinfile:
