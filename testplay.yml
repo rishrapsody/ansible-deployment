@@ -22,6 +22,10 @@
       set_fact:
         cust: "{{out.stdout_lines[0] | regex_findall('.*pool (.*)_pub_ip.*')}}"
         ip: "{{out.stdout_lines[0] | regex_findall('.*(\\S+).*')}}"
+    - name: "Print var"
+      debug:
+        msg: "{{cust}}"
+
     - name: "add line"
       lineinfile:
         path: dump.txt
