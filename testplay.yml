@@ -17,4 +17,9 @@
         msg: "{{out.stdout}}"
     - name: "Print with regex"
       debug:
-        msg: "{{out.stdout | regex_findall(‘.*pool (.*)_pub_ip (\S+).*’, multiline=True)}}"
+        msg: "{{out.stdout | regex_findall('.*pool (.*)_pub_ip (\\S+).*',multiline=True)}}"
+    - name: "add line"
+      lineinfile:
+        path: dump.txt
+        line: "{{out.stdout | regex_findall('.*pool (.*)_pub_ip (\\S+).*',multiline=True)}}"
+        create: yes
