@@ -21,7 +21,7 @@
     - name: "set_Fact"
       set_fact:
         cust: "{{out.stdout_lines[1] | regex_findall('.*pool (.*)_pub_ip.*')}}"
-        ip: "{{out.stdout_lines[1] | regex_findall('.*(\\d+.\\d+.\\d+.\\d+) prefix-length.*')}}"
+        ip: "{{out.stdout_lines[1] | regex_findall('.* (\\d+.\\d+.\\d+.\\d+) prefix-length.*')}}"
     - name: "Print var"
       debug:
         msg: "{{ip}}"
