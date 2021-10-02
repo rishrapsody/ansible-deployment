@@ -20,8 +20,8 @@
         msg: "{{out.stdout | regex_findall('.*pool (.*)_pub_ip (\\S+).*',multiline=True)}}"
     - name: "set_Fact"
       set_fact:
-        cust: "{{out.stdout_lines[0] | regex_findall('.*pool (.*)_pub_ip.*')}}"
-        ip: "{{out.stdout_lines[0] | regex_findall('.*(\\d+.\\d+.\\d+.\\d+) prefix-length.*')}}"
+        cust: "{{out.stdout_lines[1] | regex_findall('.*pool (.*)_pub_ip.*')}}"
+        ip: "{{out.stdout_lines[1] | regex_findall('.*(\\d+.\\d+.\\d+.\\d+) prefix-length.*')}}"
     - name: "Print var"
       debug:
         msg: "{{ip}}"
