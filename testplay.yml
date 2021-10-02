@@ -20,7 +20,7 @@
         msg: "{{out.stdout | regex_findall('.*pool (.*)_pub_ip (\\S+).*',multiline=True)}}"
     - name: "set_Fact"
       set_fact:
-        cust: "{{out.stdout_lines[0] | regex_findall('.*pool (.*)_pub_ip.*)}}"
+        cust: "{{out.stdout_lines[0] | regex_findall('.*pool (.*)_pub_ip.*')}}"
         ip: "{{out.stdout_lines[0] | regex_findall('.*(\\S+).*')}}"
     - name: "add line"
       lineinfile:
