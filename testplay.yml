@@ -4,14 +4,17 @@
   connection: network_cli
 
   tasks:
-    - name: "get facts"
-      ios_facts:
-        gather_subset: all
+#    - name: "get facts"
+#      ios_facts:
+#        gather_subset: all
 
     - name: "Command output"
       cli_command:
         command: "show run | sec nat pool"
       register: out
-    - name: "Print"
+    - name: "Print without regex"
       debug:
         msg: "{{out.stdout}}"
+    - name: "Print with regex"
+      debug:
+        msg: "{{out.stdout | regex_findall(‘.*pool (.*)_pub_ip (\S+).*’, multiline=True)}}"
