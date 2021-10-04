@@ -70,6 +70,7 @@
       cli_command:
         command: "show run | sec nat pool"
       register: out
+      tags: test
 
     - name: "Create vars file for Public IP"
       set_fact:
@@ -77,14 +78,17 @@
       with_together:
         - "{{out.stdout | regex_findall('.*pool (.*)_pub_ip.*') | list}}"
         - "{{out.stdout | regex_findall('.* (\\d+.\\d+.\\d+.\\d+) prefix-length.*') | list}}"
+      tags: test
 
     - name: "Save variable to file"
       template:
         src: "{{dictlist | to_nice_yaml}}"
         dest: deploy/vars/ext_dictvars.yml
+      tags: test
 
 - name: "Firewall NAT rules"
   hosts: firewall
+  tags: test
 
   tasks:
     - name: "Include vars"
