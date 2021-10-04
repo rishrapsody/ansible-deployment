@@ -80,7 +80,7 @@
 
     - name: "Save variable to file"
       template:
-        src: "dictlist : {{dictlist | to_nice_yaml}}"
+        src: "{{dictlist | to_nice_yaml}}"
         dest: deploy/vars/ext_dictvars.yml
 
 - name: "Firewall NAT rules"
