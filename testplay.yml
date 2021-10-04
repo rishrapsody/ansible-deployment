@@ -31,8 +31,8 @@
       set_fact:
         test: "{{test|default([]) + [{'cust': item.0, 'ip': item.1}] }}"
       with_together:
-        - "{{out.stdout_lines | regex_findall('.*pool (.*)_pub_ip.*',multiline=True) | list}}"
-        - "{{out.stdout_lines | regex_findall('.* (\\d+.\\d+.\\d+.\\d+) prefix-length.*',multiline=True) | list}}"
+        - "{{out.stdout | regex_findall('.*pool (.*)_pub_ip.*') | list}}"
+        - "{{out.stdout | regex_findall('.* (\\d+.\\d+.\\d+.\\d+) prefix-length.*') | list}}"
 
     - name: "Print var"
       debug: var=test
