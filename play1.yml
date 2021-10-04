@@ -81,9 +81,9 @@
       tags: test
 
     - name: "Save variable to file"
-      template:
-        src: "{{dictlist | to_nice_yaml}}"
-        dest: deploy/vars/ext_dictvars.yml
+      copy:
+        content: "{{dictlist | to_nice_yaml}}"
+        path: deploy/vars/ext_dictvars.yml
       tags: test
 
 - name: "Firewall NAT rules"
