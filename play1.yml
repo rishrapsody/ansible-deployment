@@ -66,3 +66,30 @@
     - name: "Push core config"
       include_tasks: deploy/tasks/push_core_rtr_cust_config.yml
 
+    - name: "Command output"
+      cli_command:
+        command: "show run | sec nat pool"
+      register: out
+
+    - name: "Create vars file for Public IP"
+      set_fact:
+        dictlist: "{{dictlist|default([]) + [{'cust': item.0, 'ip': item.1}] }}"
+      with_together:
+        - "{{out.stdout | regex_findall('.*pool (.*)_pub_ip.*') | list}}"
+        - "{{out.stdout | regex_findall('.* (\\d+.\\d+.\\d+.\\d+) prefix-length.*') | list}}"
+
+- name: "Firewall NAT rules"
+  hosts: firewall
+
+  tasks:
+    - name: "Added iptable rule for NAT"
+      iptables:
+        chain: POSTROUTING
+        table: nat
+        source: "{{item.ip}}"
+        comment: nat for customer "{{item.cust}}"
+        out_interface: eth0
+        jump: MASQUERADE
+        ctstate: ESTABLISHED,RELATED
+      loop:
+        "{{ dictlist }}"
