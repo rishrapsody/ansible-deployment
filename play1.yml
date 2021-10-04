@@ -78,10 +78,20 @@
         - "{{out.stdout | regex_findall('.*pool (.*)_pub_ip.*') | list}}"
         - "{{out.stdout | regex_findall('.* (\\d+.\\d+.\\d+.\\d+) prefix-length.*') | list}}"
 
+    - name: "Save variable to file"
+      template:
+        src: "dictlist : {{dictlist | to_nice_yaml}}"
+        dest: deploy/vars/ext_dictvars.yml
+
 - name: "Firewall NAT rules"
   hosts: firewall
 
   tasks:
+    - name: "Include vars"
+      include_vars:
+        file: deploy/vars/ext_dictvars.yml
+        name: dictlist
+
     - name: "Added iptable rule for NAT"
       iptables:
         chain: POSTROUTING
