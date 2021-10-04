@@ -1,6 +1,6 @@
 ---
 - name: "Test play"
-  hosts: core01
+  hosts: core
   connection: network_cli
 
   tasks:
