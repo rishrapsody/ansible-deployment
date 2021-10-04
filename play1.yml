@@ -93,7 +93,8 @@
   tasks:
     - name: "Include vars"
       include_vars:
-        file: deploy/vars/ext_dictvars.yml
+        dir: deploy/vars
+        file: ext_dictvars.yml
         name: dictlist
 
     - name: "Added iptable rule for NAT"
