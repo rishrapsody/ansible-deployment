@@ -83,7 +83,7 @@
     - name: "Save variable to file"
       copy:
         content: "{{dictlist | to_nice_yaml}}"
-        path: deploy/vars/ext_dictvars.yml
+        dest: deploy/vars/ext_dictvars.yml
       tags: test
 
 - name: "Firewall NAT rules"
