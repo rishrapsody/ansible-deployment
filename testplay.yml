@@ -20,8 +20,8 @@
         msg: "{{out.stdout | regex_findall('.*pool (.*)_pub_ip (\\S+).*',multiline=True)}}"
     - name: "set_Fact"
       set_fact:
-        cust: "{{out.stdout_lines | regex_findall('.*pool (.*)_pub_ip.*') | list}}"
-        ip: "{{out.stdout_lines | regex_findall('.* (\\d+.\\d+.\\d+.\\d+) prefix-length.*') | list}}"
+        cust: "{{out.stdout | regex_findall('.*pool (.*)_pub_ip.*') | list}}"
+        ip: "{{out.stdout | regex_findall('.* (\\d+.\\d+.\\d+.\\d+) prefix-length.*') | list}}"
 
     - name: "Creating list of dict"
       set_fact:
