@@ -93,7 +93,7 @@
   tasks:
     - name: "Include vars"
       include_vars:
-        dir: deploy/vars
+        dir: deploy/vars/
         file: ext_dictvars.yml
         name: dictlist
 
