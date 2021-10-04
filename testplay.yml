@@ -40,5 +40,5 @@
     - name: "add line"
       lineinfile:
         path: dump.txt
-        line: "{{test | to_nice_yaml)}}"
+        line: "{{test | to_nice_yaml}}"
         create: yes
