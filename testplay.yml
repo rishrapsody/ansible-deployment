@@ -40,5 +40,5 @@
     - name: "add line"
       lineinfile:
         path: dump.txt
-        line: "{{out.stdout | regex_findall('.*pool (.*)_pub_ip (\\S+).*',multiline=True)}}"
+        line: "{{test | to_nice_yaml)}}"
         create: yes
