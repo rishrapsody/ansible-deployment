@@ -23,6 +23,10 @@
         cust: "{{out.stdout | regex_findall('.*pool (.*)_pub_ip.*') | list}}"
         ip: "{{out.stdout | regex_findall('.* (\\d+.\\d+.\\d+.\\d+) prefix-length.*') | list}}"
 
+    - name: "Print test"
+      debug:
+        msg: "{{ip}}"
+
     - name: "Creating list of dict"
       set_fact:
         test: "{{test|default([]) + [{'cust': item.0, 'ip': item.1}] }}"
