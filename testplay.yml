@@ -22,9 +22,16 @@
       set_fact:
         cust: "{{out.stdout_lines[1] | regex_findall('.*pool (.*)_pub_ip.*')}}"
         ip: "{{out.stdout_lines[1] | regex_findall('.* (\\d+.\\d+.\\d+.\\d+) prefix-length.*')}}"
+
+    - name: "Creating list of dict"
+      set_fact:
+        test: "{{test|default([]) + [{'cust': item.0, 'ip': item.1}] }}"
+      with_together:
+        - "{{out.stdout_lines | regex_findall('.*pool (.*)_pub_ip.*')}}"
+        - "{{out.stdout_lines | regex_findall('.* (\\d+.\\d+.\\d+.\\d+) prefix-length.*')}}"
+
     - name: "Print var"
-      debug:
-        msg: "{{ip}}"
+      debug: var=test
 
     - name: "add line"
       lineinfile:
