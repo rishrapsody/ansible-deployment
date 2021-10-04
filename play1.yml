@@ -94,7 +94,8 @@
     - name: "Include vars"
       include_vars:
         dir: deploy/vars/
-        file: ext_dictvars.yml
+        extensions:
+          - 'yml'
         name: dictlist
 
     - name: "Added iptable rule for NAT"
