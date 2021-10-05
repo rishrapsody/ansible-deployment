@@ -92,7 +92,7 @@
 
     - name: "Save variable to file"
       copy:
-        content: "{{var1 | to_nice_yaml}}"
+        content: "{{var1}}"
         dest: deploy/vars/ext_dictvars.yml
       tags: test
 
