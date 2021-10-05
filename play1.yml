@@ -80,9 +80,14 @@
         - "{{out.stdout | regex_findall('.* (\\d+.\\d+.\\d+.\\d+) prefix-length.*') | list}}"
       tags: test
 
+    - name: "Set name to var data"
+      set_fact:
+        var1: "{{dictlist}}"
+      tags: test
+
     - name: "Save variable to file"
       copy:
-        content: "var1 :" + "{{dictlist}}"
+        content: "{{var1}}"
         dest: deploy/vars/ext_dictvars.yml
       tags: test
 
@@ -96,7 +101,6 @@
         dir: deploy/vars/
         extensions:
           - 'yml'
-        name: dictlist
 
     - name: "Added iptable rule for NAT"
       iptables:
@@ -108,4 +112,4 @@
         jump: MASQUERADE
         ctstate: ESTABLISHED,RELATED
       loop:
-        "{{ dictlist }}"
+        "{{ var1 }}"
