@@ -82,8 +82,12 @@
 
     - name: "Set name to var data"
       set_fact:
-        var1="{{dictlist}}"
+        var1 : "{{dictlist}}"
       tags: test
+
+    - name: "print"
+      debug:
+        msg: "{{var1}}"
 
     - name: "Save variable to file"
       copy:
