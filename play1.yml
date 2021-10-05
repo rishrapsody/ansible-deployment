@@ -87,7 +87,7 @@
 
     - name: "Save variable to file"
       copy:
-        src: "{{var1}}"
+        content: "{{var1}}"
         dest: deploy/vars/ext_dictvars.yml
       tags: test
 
