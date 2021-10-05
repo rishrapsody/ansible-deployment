@@ -96,11 +96,12 @@
   tags: test
 
   tasks:
-#    - name: "Include vars"
-#      include_vars:
-#        dir: deploy/vars/
-#        extensions:
-#          - 'yml'
+    - name: "Include vars"
+      include_vars:
+        dir: deploy/vars/
+        extensions:
+          - 'yml'
+        name: var1
 
     - name: "Added iptable rule for NAT"
       iptables:
