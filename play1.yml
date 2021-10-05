@@ -123,4 +123,4 @@
         jump: MASQUERADE
         ctstate: ESTABLISHED,RELATED
       loop:
-        "{{ var2 }}"
+        "{{ temp }}"
