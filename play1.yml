@@ -87,7 +87,7 @@
 
     - name: "Save variable to file"
       copy:
-        content: "{{var1}}"
+        src: "{{var1}}"
         dest: deploy/vars/ext_dictvars.yml
       tags: test
 
@@ -96,11 +96,11 @@
   tags: test
 
   tasks:
-    - name: "Include vars"
-      include_vars:
-        dir: deploy/vars/
-        extensions:
-          - 'yml'
+#    - name: "Include vars"
+#      include_vars:
+#        dir: deploy/vars/
+#        extensions:
+#          - 'yml'
 
     - name: "Added iptable rule for NAT"
       iptables:
