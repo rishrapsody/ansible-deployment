@@ -85,11 +85,6 @@
         var1 : "temp: {{dictlist}}"
       tags: test
 
-    - name: "print"
-      debug:
-        msg: "{{var1}}"
-      tags: test
-
     - name: "Save variable to file"
       copy:
         content: "{{var1}}"
