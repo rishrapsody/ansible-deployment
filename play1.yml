@@ -88,6 +88,7 @@
     - name: "print"
       debug:
         msg: "{{var1}}"
+      tags: test
 
     - name: "Save variable to file"
       copy:
