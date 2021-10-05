@@ -117,5 +117,7 @@
         out_interface: eth0
         jump: MASQUERADE
         ctstate: ESTABLISHED,RELATED
+      become: yes
       loop:
         "{{ var1['temp'] }}"
+
