@@ -1,7 +1,7 @@
 ---
 - name: "Include vars"
   include_vars:
-    dir: deploy/vars/
+    dir: ../vars/
     extensions:
       - 'yml'
     name: var1
