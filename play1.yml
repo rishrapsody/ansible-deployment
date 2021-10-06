@@ -19,6 +19,8 @@
 
 - name: "Firewall Base Config"
   hosts: firewall
+  become: yes
+  become_method: sudo
 
   tasks:
     - name: "Configuring firewall base config"
