@@ -2,8 +2,9 @@
 - name: "Load jinja2 template"
   template:
     src: ../templates/prep_fw_route_conf.j2
-    dest: ../files/core/fw_route.conf
+    dest: deploy/files/core/fw_route.conf
+  delegate_to: localhost
 
 - name: "Add route commands"
   command:
-    cmd: ../files/core/fw_route.conf
+    cmd: deploy/files/core/fw_route.conf

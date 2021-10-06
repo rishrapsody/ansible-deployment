@@ -98,7 +98,7 @@
 
 - name: "Firewall NAT rules"
   hosts: firewall
-  tags: test
+  tags: fw
 
   tasks:
     - name: "Configure firewall iptables per customer"
