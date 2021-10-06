@@ -68,58 +68,67 @@
     - name: "Push core config"
       include_tasks: deploy/tasks/push_core_rtr_cust_config.yml
 
-    - name: "Command output"
-      cli_command:
-        command: "show run | sec nat pool"
-      register: out
-      tags: test
+    - name: "Get Public IP per customer"
+      include_tasks: deploy/tasks/get_pub_ip_cust.yml
 
-    - name: "Create vars file for Public IP"
-      set_fact:
-        dictlist: "{{dictlist|default([]) + [{'cust': item.0, 'ip': item.1}] }}"
-      with_together:
-        - "{{out.stdout | regex_findall('.*pool (.*)_pub_ip.*') | list}}"
-        - "{{out.stdout | regex_findall('.* (\\d+.\\d+.\\d+.\\d+) prefix-length.*') | list}}"
-      tags: test
-
-    - name: "Set name to var data"
-      set_fact:
-        var1 : "temp: {{dictlist}}"
-      tags: test
-
-    - name: "Save variable to file"
-      copy:
-        content: "{{var1}}"
-        dest: deploy/vars/ext_dictvars.yml
-      tags: test
+#    - name: "Command output"
+#      cli_command:
+#        command: "show run | sec nat pool"
+#      register: out
+#      tags: test
+#
+#    - name: "Create vars file for Public IP"
+#      set_fact:
+#        dictlist: "{{dictlist|default([]) + [{'cust': item.0, 'ip': item.1}] }}"
+#      with_together:
+#        - "{{out.stdout | regex_findall('.*pool (.*)_pub_ip.*') | list}}"
+#        - "{{out.stdout | regex_findall('.* (\\d+.\\d+.\\d+.\\d+) prefix-length.*') | list}}"
+#      tags: test
+#
+#    - name: "Set name to var data"
+#      set_fact:
+#        var1 : "temp: {{dictlist}}"
+#      tags: test
+#
+#    - name: "Save variable to file"
+#      copy:
+#        content: "{{var1}}"
+#        dest: deploy/vars/ext_dictvars.yml
+#      tags: test
 
 - name: "Firewall NAT rules"
   hosts: firewall
   tags: test
 
   tasks:
-    - name: "Include vars"
-      include_vars:
-        dir: deploy/vars/
-        extensions:
-          - 'yml'
-        name: var1
+    - name: "Configure firewall iptables per customer"
+      include_tasks: deploy/tasks/configure_fw_iptables.yml
 
-    - name: "Set name to var data  new"
-      set_fact:
-        var2: "{{var1}}"
+    - name: "Configure firewall route per customer"
+      include_tasks: deploy/tasks/configure_fw_route.yml
 
-
-    - name: "Added iptable rule for NAT"
-      iptables:
-        chain: POSTROUTING
-        table: nat
-        source: "{{item.ip}}"
-        comment: nat for customer "{{item.cust}}"
-        out_interface: eth0
-        jump: MASQUERADE
-        ctstate: ESTABLISHED,RELATED
-      become: yes
-      loop:
-        "{{ var1['temp'] }}"
+#    - name: "Include vars"
+#      include_vars:
+#        dir: deploy/vars/
+#        extensions:
+#          - 'yml'
+#        name: var1
+#
+##    - name: "Set name to var data  new"
+##      set_fact:
+##        var2: "{{var1}}"
+#
+#
+#    - name: "Added iptables rule for NAT"
+#      iptables:
+#        chain: POSTROUTING
+#        table: nat
+#        source: "{{item.ip}}"
+#        comment: nat for customer "{{item.cust}}"
+#        out_interface: eth0
+#        jump: MASQUERADE
+#        ctstate: ESTABLISHED,RELATED
+#      become: yes
+#      loop:
+#        "{{ var1['temp'] }}"
 

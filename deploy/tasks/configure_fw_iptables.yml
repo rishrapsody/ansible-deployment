@@ -1,0 +1,25 @@
+---
+- name: "Include vars"
+  include_vars:
+    dir: deploy/vars/
+    extensions:
+      - 'yml'
+    name: var1
+
+#    - name: "Set name to var data  new"
+#      set_fact:
+#        var2: "{{var1}}"
+
+
+- name: "Added iptables rule for NAT"
+  iptables:
+    chain: POSTROUTING
+    table: nat
+    source: "{{item.ip}}"
+    comment: nat for customer "{{item.cust}}"
+    out_interface: eth0
+    jump: MASQUERADE
+    ctstate: ESTABLISHED,RELATED
+  become: yes
+  loop:
+    "{{ var1['temp'] }}"
