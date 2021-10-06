@@ -19,7 +19,7 @@
     comment: nat for customer "{{item.cust}}"
     out_interface: eth0
     jump: MASQUERADE
-    ctstate: ESTABLISHED,RELATED
+    ctstate: NEW,ESTABLISHED,RELATED
   become: yes
   loop:
     "{{ var1['temp'] }}"
