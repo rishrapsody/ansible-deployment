@@ -96,9 +96,11 @@
 #        dest: deploy/vars/ext_dictvars.yml
 #      tags: test
 
-- name: "Firewall NAT rules"
+- name: "Firewall NAT and route"
   hosts: firewall
   tags: test
+  become: yes
+  become_method: sudo
 
   tasks:
     - name: "Configure firewall iptables per customer"
