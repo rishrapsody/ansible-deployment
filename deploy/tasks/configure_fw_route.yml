@@ -5,6 +5,10 @@
     dest: deploy/files/core/fw_route.conf
   delegate_to: localhost
 
-- name: "Add route commands"
+#- name: "Add route commands"
+#  command:
+#    cmd: deploy/files/core/fw_route.conf
+- name: "Add route"
   command:
-    cmd: deploy/files/core/fw_route.conf
+    cmd: "{{item}}"
+  with_lines: cat deploy/files/core/fw_route.conf

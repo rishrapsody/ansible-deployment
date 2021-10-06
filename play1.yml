@@ -99,6 +99,8 @@
 - name: "Firewall NAT rules"
   hosts: firewall
   tags: fw
+  become: yes
+  become_method: sudo
 
   tasks:
     - name: "Configure firewall iptables per customer"
