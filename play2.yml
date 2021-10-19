@@ -1,0 +1,115 @@
+---
+- name: "Genie first run"
+  hosts: core
+  connection: network_cli
+  collections:
+    - clay584.genie
+  tasks:
+    - name: "Learn conf before change"
+      learn_genie:
+        host: "{{ansible_host}}"
+        username: ansible
+        password: ansible
+        os: ios
+        feature: bgp
+      register: bgp_genie_1
+
+- name: "Core Base config"
+  hosts: core
+  connection: network_cli
+
+  tasks:
+    - name: "Configuring core routers base config"
+      cli_config:
+        config: "{{lookup('template','core_base_template.j2')}}"
+
+- name: "Switch Base Config"
+  hosts: switch
+  connection: network_cli
+
+  tasks:
+    - name: "Configuring switch base config"
+      cli_config:
+        config: "{{lookup('template','switch_base_template.j2')}}"
+
+- name: "Firewall Base Config"
+  hosts: firewall
+  become: yes
+  become_method: sudo
+
+  tasks:
+    - name: "Configuring firewall base config"
+      blockinfile:
+        block: "{{ lookup('template','fw_base_template.j2') }}"
+        path: /etc/network/interfaces
+
+- name: "Customer router config"
+  hosts: customer
+  connection: network_cli
+
+  tasks:
+    - name: "Building directory space"
+      include_tasks: deploy/tasks/build_config_directory.yml
+
+    - name: "Building customer config"
+      include_tasks: deploy/tasks/prep_cust_config.yml
+
+    - name: "Push customer config"
+      include_tasks: deploy/tasks/push_cust_rtr_config.yml
+
+- name: "Configuring Switch for customer"
+  hosts: switch
+  connection: network_cli
+
+  tasks:
+    - name: "Preparing switch config"
+      include_tasks: deploy/tasks/prep_switch_cust_config.yml
+
+    - name: "Push switch config"
+      include_tasks: deploy/tasks/push_switch_cust_config.yml
+
+
+- name: "Configuring Core  for customer"
+  hosts: core
+  connection: network_cli
+
+  tasks:
+    - name: "Preparing core config"
+      include_tasks: deploy/tasks/prep_core_rtr_cust_config.yml
+
+    - name: "Push core config"
+      include_tasks: deploy/tasks/push_core_rtr_cust_config.yml
+
+    - name: "Get Public IP per customer"
+      include_tasks: deploy/tasks/get_pub_ip_cust.yml
+
+
+- name: "Firewall NAT rules"
+  hosts: firewall
+  tags: fw
+  become: yes
+  become_method: sudo
+
+  tasks:
+    - name: "Configure firewall iptables per customer"
+      include_tasks: deploy/tasks/configure_fw_iptables.yml
+
+    - name: "Configure firewall route per customer"
+      include_tasks: deploy/tasks/configure_fw_route.yml
+
+
+- name: "Genie second run"
+  hosts: core
+  connection: network_cli
+  collections:
+    - clay584.genie
+  tasks:
+    - name: "Learn conf after change"
+      learn_genie:
+        host: "{{ansible_host}}"
+        username: ansible
+        password: ansible
+        os: ios
+        feature: bgp
+        compare_to: "{{ bgp_genie_1 }}"
+      diff: true
